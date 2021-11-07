@@ -1,3 +1,3 @@
 # MSc_Code
 
-test
+Code made by N. Yallop as part of Bath's MSc Comp. Sci. course
