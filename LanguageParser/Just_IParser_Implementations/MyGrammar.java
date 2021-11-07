@@ -1,0 +1,110 @@
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import computation.contextfreegrammar.*;
+
+public class MyGrammar {
+	public static ContextFreeGrammar makeGrammar() {
+		// You can write your code here to make the context-free grammar from the assignment
+
+    Variable S = new Variable('s');
+    Variable PlusV = new Variable("V1");
+    Variable MinusV = new Variable("V2");
+    Variable MultiplyV = new Variable("V3");
+    Variable T = new Variable('T');
+    Variable F = new Variable('F');
+    Variable E = new Variable('E');
+    Variable E1 = new Variable("E1");
+    Variable E2 = new Variable("E2");
+    Variable C = new Variable('C');
+    Set<Variable> Variables = new HashSet<Variable>();
+    Variables.add(S);
+    Variables.add(PlusV);
+    Variables.add(MinusV);
+    Variables.add(MultiplyV);
+    Variables.add(T);
+    Variables.add(F);
+    Variables.add(E);
+    Variables.add(E1);
+    Variables.add(E2);
+    Variables.add(C);
+
+    Terminal PlusT = new Terminal('+');
+    Terminal MinusT = new Terminal('-');
+    Terminal MultiplyT = new Terminal('*');
+    Terminal OneT = new Terminal('1');
+    Terminal ZeroT = new Terminal('0');
+    Terminal XT = new Terminal('x');
+    Set<Terminal> Terminals = new HashSet<Terminal>();
+    Terminals.add(PlusT);
+    Terminals.add(MinusT);
+    Terminals.add(MultiplyT);
+    Terminals.add(OneT);
+    Terminals.add(ZeroT);
+    Terminals.add(XT);
+
+    Rule StartR1 = new Rule(S,new Word(E,E1));
+    Rule StartR2 = new Rule(S,new Word(T, E2));
+    Rule StartR3 = new Rule(S,new Word(MinusV, C));
+    Rule StartR4 = new Rule(S,new Word(OneT));
+    Rule StartR5 = new Rule(S,new Word(ZeroT));
+    Rule StartR6 = new Rule(S,new Word(XT));
+    Rule PlusR = new Rule(PlusV,new Word(PlusT));
+    Rule MinusR = new Rule(MinusV,new Word(MinusT));
+    Rule MultiplyR = new Rule(MultiplyV,new Word(MultiplyT));
+    Rule ER1 = new Rule(E,new Word(E,E1));
+    Rule ER2 = new Rule(E,new Word(T, E2));
+    Rule ER3 = new Rule(E,new Word(MinusV, C));
+    Rule ER4 = new Rule(E,new Word(OneT));
+    Rule ER5 = new Rule(E,new Word(ZeroT));
+    Rule ER6 = new Rule(E,new Word(XT));
+    Rule E1R = new Rule(E1,new Word(PlusV, T));
+    Rule E2R = new Rule(E2,new Word(MultiplyV, F));
+    Rule TR1 = new Rule(T,new Word(T, E2));
+    Rule TR2 = new Rule(T,new Word(MinusV, C));
+    Rule TR3 = new Rule(T,new Word(OneT));
+    Rule TR4 = new Rule(T,new Word(ZeroT));
+    Rule TR5 = new Rule(T,new Word(XT));
+    Rule FR1 = new Rule(F,new Word(MinusV, C));
+    Rule FR2 = new Rule(F,new Word(OneT));
+    Rule FR3 = new Rule(F,new Word(ZeroT));
+    Rule FR4 = new Rule(F,new Word(XT));
+    Rule CR1 = new Rule(C,new Word(OneT));
+    Rule CR2 = new Rule(C,new Word(ZeroT));
+    Rule CR3 = new Rule(C,new Word(XT));
+    List<Rule> Rules = new ArrayList<Rule>();
+    Rules.add(StartR1);
+    Rules.add(StartR2);
+    Rules.add(StartR3);
+    Rules.add(StartR4);
+    Rules.add(StartR5);
+    Rules.add(StartR6);
+    Rules.add(PlusR);
+    Rules.add(MinusR);
+    Rules.add(MultiplyR);
+    Rules.add(ER1);
+    Rules.add(ER2);
+    Rules.add(ER3);
+    Rules.add(ER4);
+    Rules.add(ER5);
+    Rules.add(ER6);
+    Rules.add(E1R);
+    Rules.add(E2R);
+    Rules.add(TR1);
+    Rules.add(TR2);
+    Rules.add(TR3);
+    Rules.add(TR4);
+    Rules.add(TR5);
+    Rules.add(FR1);
+    Rules.add(FR2);
+    Rules.add(FR3);
+    Rules.add(FR4);
+    Rules.add(CR1);
+    Rules.add(CR2);
+    Rules.add(CR3);
+
+    return(new ContextFreeGrammar(Variables, Terminals, Rules,  S));
+	}
+}
